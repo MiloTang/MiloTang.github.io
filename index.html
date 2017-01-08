@@ -7,13 +7,13 @@
 </script>
 <script>
 $(document).ready(function(){
-	function load() {
-		$("#div1").load("/try/ajax/demo_test.txt");
-	}
+	$("button").click(function(){
+		$("#div1").load("120.25.92.129");
+	});
 });
 </script>
 </head>
-<body onload="load()">
+<body>
 
 <div id="div1"><h2>使用 jQuery AJAX 修改文本内容</h2></div>
 <button>获取外部内容</button>
