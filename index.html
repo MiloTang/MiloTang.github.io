@@ -11,161 +11,33 @@
     <link href="static/css/bootstrap.css" rel="stylesheet">
     <link href="static/css/carousel.css" rel="stylesheet">
 	<style>
-	li {list-style-type:none;}
-	.blocka
-	{
-	 background-color:#000066;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockb
-	{
-	 background-color:#003366;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockc
-	{
-	 background-color:#009966;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockd
-	{
-	 background-color:#330066;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blocke
-	{
-	 background-color:#333366;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockf
-	{
-	 background-color:#663366;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockg
-	{
-	 background-color:#669966;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blocka:hover
-	{
-	 background-color:#CC9966 ;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockb:hover
-	{
-	 background-color:#9999CC;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockc:hover
-	{
-	 background-color:#99CC99;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockd:hover
-	{
-	 background-color:#CCCC99;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blocke:hover
-	{
-	 background-color:#CC9999;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockf:hover
-	{
-	 background-color:#996699;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
-	.blockg:hover
-	{
-	 background-color:#FF9966;
-	 width:100%;
-	 height:13rem;
-	 line-height:13rem;
-	 text-align:center;
-	 color:white;
-	 font-size:3rem;
-	}
+     li{
+		 list-style-type:none;
+	 }
+	 .my_list
+	 {
+		 margin-bottom: 8px;
+		 border-bottom: 1px solid silver;
+	 }
+		.my_list :hover
+		{
+			background-color:silver;
+
+		}
 	</style>
   </head>
   <body>
   <nav class="navbar navbar-default navbar-fixed-bottom">
-	<div class="container-fluid" style="font-size:3rem;padding-top:1rem;text-align:center;"> 		
+	<div class="container-fluid" style="font-size:2.2rem;padding-top:1rem;text-align:center;">
 		    <div class="col-xs-3 col-sm-3">
-			<li class="dropdown">
+			<div class="dropdown">
 				<a href="#" >
 					<span class="glyphicon glyphicon-home"></span>
 				</a>
-			</li>
+			</div>
 			</div>
 			<div class="col-xs-3 col-sm-3">
-			<li class="dropdown">
+			<div class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<span class="glyphicon glyphicon-th-large"></span>
 				</a>
@@ -176,10 +48,10 @@
 					<li class="divider"></li>
 					<li><a href="#">最新</a></li>
 				</ul>
-			</li>
 			</div>
-			<div class="col-xs-3 col-sm-3">
-			<li class="dropdown">
+			</div>
+			<div class="col-xs-3 col-sm-3" >
+			<div class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<span class="glyphicon glyphicon-folder-open"></span>
 				</a>
@@ -190,7 +62,7 @@
 					<li class="divider"></li>
 					<li><a href="#">最新</a></li>
 				</ul>
-			</li>
+			</div>
 			</div>	
 			<div class="col-xs-3 col-sm-3">
 			<li class="dropdown">
@@ -223,7 +95,7 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active left">
-          <img src="static/images/banner1.jpg" alt="Third slide">
+          <img class="img-circle"  src="static/images/banner1.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
               
@@ -232,7 +104,7 @@
           </div>
         </div>
         <div class="item next left">
-          <img src="static/images/banner2.jpg" alt="Third slide">
+          <img class="img-circle"  src="static/images/banner2.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
               
@@ -241,7 +113,7 @@
           </div>
         </div>
 		<div class="item">
-          <img src="static/images/banner3.jpg" alt="Third slide">
+          <img class="img-circle"  src="static/images/banner3.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
              
@@ -250,7 +122,7 @@
           </div>
         </div>
 		<div class="item">
-          <img src="static/images/banner4.jpg" alt="Third slide">
+          <img class="img-circle"  src="static/images/banner4.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
@@ -258,7 +130,7 @@
           </div>
         </div>
 		<div class="item">
-          <img src="static/images/banner5.jpg" alt="Third slide">
+          <img class="img-circle"  src="static/images/banner5.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
@@ -274,115 +146,111 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
         <span class="sr-only">下一张</span>
       </a>
-    </div><!-- /.carousel -->  
+    </div><!-- /.carousel -->
     <div class="container">
+<div class="my_list" style="height:60px;">
+		<div class="row" >
+			<div class="col-sm-10 col-xs-10">
+				<div class="media" >
+					<a href="#" class="pull-left"><img class="img-circle"  src="static/images/java.jpg"  style="width: 60px" alt='' /></a>
+					<div class="media-body">
+						<h4 class="media-heading">
+							JAVA
+						</h4> 好多程序员
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2 col-xs-2 ">
+				<a href="#" class="pull-right" style=" line-height: 60px; text-align: center;">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+		
+		<div class="my_list" style="height:60px;">
+			<div class="row" >
+				<div class="col-sm-10 col-xs-10">
+					<div class="media" >
+						<a href="#" class="pull-left"><img class="img-circle"  src="static/images/mariadb.jpg"  style="width: 60px" alt='' /></a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								mariadb
+							</h4> 随时准备替换MYSQL
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2 col-xs-2 ">
+					<a href="#" class="pull-right" style=" line-height: 60px; text-align: center;">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="my_list" style="height:60px;">
+			<div class="row" >
+				<div class="col-sm-10 col-xs-10">
+					<div class="media" >
+						<a href="#" class="pull-left"><img class="img-circle"  src="static/images/c.jpg"  style="width: 60px" alt='' /></a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								C语言
+							</h4> C语言是一门通用计算机编程语言，应用广泛
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2 col-xs-2 ">
+					<a href="#" class="pull-right" style=" line-height: 60px; text-align: center;">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="my_list" style="height:60px;">
+			<div class="row" >
+				<div class="col-sm-10 col-xs-10">
+					<div class="media" >
+						<a href="#" class="pull-left"><img class="img-circle"  src="static/images/php.jpg"  style="width: 60px" alt='' /></a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								PHP
+							</h4> 世界上最好的语言
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2 col-xs-2 ">
+					<a href="#" class="pull-right" style=" line-height: 60px; text-align: center;">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="my_list" style="height:60px;">
+			<div class="row" >
+				<div class="col-sm-10 col-xs-10">
+					<div class="media" >
+						<a href="#" class="pull-left"><img class="img-circle"  src="static/images/REDIS.jpg"  style="width: 60px" alt='' /></a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								Redis
+							</h4> 内存数据库
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2 col-xs-2 ">
+					<a href="#" class="pull-right" style=" line-height: 60px; text-align: center;">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+			</div>
+		</div>
 
+		<!-- START THE FEATURETTES -->
 
-      <!-- START THE FEATURETTES -->
-      <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="计算机组成原理" target="_blank" ><div class="blocka">计算机组成原理</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="计算机组成原理" target="_blank" >计算机组成原理<br><small>Milo</small></a>
-              </h3>
-              <p>
-              计算机由运算器、控制器、存储器、输入设备和输出设备五部分组成
-              </p>
-            </div>
-          </div>
-       </div>
-	   <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="计算机网络" target="_blank" ><div class="blockf">计算机网络</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="计算机网络" target="_blank" >计算机网络编码规范<br><small>MILO</small></a>
-              </h3>
-              <p>
-              一些相互连接的、以共享资源为目的的、自治的计算机的集合
-              </p>
-            </div>
-          </div>
-       </div>
-	   <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="数据结构与算法" target="_blank" ><div class="blockc">数据结构与算法</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="数据结构与算法" target="_blank">数据结构与算法<br><small>MILO</small></a>
-              </h3>
-              <p>
-              数据结构与算法
-              </p>
-            </div>
-          </div>
-       </div>
-	   <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="操作系统" target="_blank" ><div class="blockb">操作系统</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="操作系统" target="_blank" >操作系统编码规范<br><small>MILO</small></a>
-              </h3>
-              <p>
-              操作系统
-              </p>
-            </div>
-          </div>
-       </div>
-	   <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="操作系统" target="_blank" ><div class="blockb">JAVA</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="操作系统" target="_blank" >操作系统编码规范<br><small>MILO</small></a>
-              </h3>
-              <p>
-              JAVA
-              </p>
-            </div>
-          </div>
-       </div>
-	   <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="操作系统" target="_blank" ><div class="blockg">PHP</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="操作系统" target="_blank" >操作系统编码规范<br><small>MILO</small></a>
-              </h3>
-              <p>
-              PHP
-              </p>
-            </div>
-          </div>
-       </div>
-	    <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="操作系统" target="_blank" ><div class="blockc">Python</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="操作系统" target="_blank" >操作系统编码规范<br><small>MILO</small></a>
-              </h3>
-              <p>
-              Python
-              </p>
-            </div>
-          </div>
-       </div>
-	   <div class="col-sm-6 col-md-4 col-lg-3 ">
-          <div style="height: 336px;" class="thumbnail">
-            <a href="#" title="操作系统" target="_blank" ><div class="blockf">C/C++</div></a>
-            <div class="caption">
-              <h3>
-                <a href="#" title="操作系统" target="_blank" >操作系统编码规范<br><small>MILO</small></a>
-              </h3>
-              <p>
-              C/C++
-              </p>
-            </div>
-          </div>
-       </div>
+      
       <!-- /END THE FEATURETTES -->
 
 
