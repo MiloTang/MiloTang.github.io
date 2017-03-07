@@ -54,8 +54,364 @@
 
 <div class="container">
  <h2 class="text-center">CentOS7.2下Hadoop2.7.3的搭建</h2>
-<blockquote><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">1.基本环境：</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">$&nbsp; cat&nbsp; /etc/redhat-release</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">CentOS Linux release 7.3.1611 (Core)</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">$ uname -r</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">3.10.0-514.2.2.el7.x86_64</span><br></blockquote><blockquote><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">2.配置系统环境</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">$ sudo vim /etc/hostname<br>master<br>$ sudo vim /etc/hosts<br>192.168.110.100&nbsp; master</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">192.168.110.101&nbsp; node1<br></span><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">192.168.110.102&nbsp; node2<br></span>添加用户hadoop<br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">useradd hadoop</span><br></span><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">passwd &nbsp;hadoop<br><br></span><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">vim /etc/sudoers<br>在root &nbsp; &nbsp;ALL=(ALL) &nbsp; &nbsp; &nbsp; ALL 后加入</span>
-<p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">hadoop &nbsp; &nbsp;ALL=(ALL) &nbsp; &nbsp; &nbsp; ALL</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';"><br></span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">无密钥连接</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">vim /etc/ssh/sshd_config</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">RSAAuthentication yes<br>PubkeyAuthentication yes</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">去掉注释</span><br><b><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: rgb(255, 20, 147) !important; background: none !important;">ssh</code><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">-keygen&nbsp;-t&nbsp;rsa</code></b></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><b><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;"></code><code class="bash spaces" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; background: none !important;"></code><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: rgb(255, 20, 147) !important; background: none !important;">cd</code>&nbsp;<code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">/home/hadoop/</code><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">.</code><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: rgb(255, 20, 147) !important; background: none !important;">ssh</code><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">/</code><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height:
+    1.基本环境：
+    $  cat  /etc/redhat-release
+    CentOS Linux release 7.3.1611 (Core)
+    $ uname -r
+    3.10.0-514.2.2.el7.x86_64
+
+    2.配置系统环境
+    $ sudo vim /etc/hostname
+    master
+    $ sudo vim /etc/hosts
+    192.168.110.100  master
+    192.168.110.101  node1
+    192.168.110.102  node2
+    添加用户hadoop
+    useradd hadoop
+    passwd  hadoop
+
+    vim /etc/sudoers
+    在root    ALL=(ALL)       ALL 后加入
+
+    hadoop    ALL=(ALL)       ALL
+
+
+    无密钥连接
+
+    vim /etc/ssh/sshd_config
+
+    RSAAuthentication yes
+    PubkeyAuthentication yes
+
+    去掉注释
+    ssh-keygen -t rsa
+
+    cd /home/hadoop/.ssh/
+
+    cp id_rsa.pub  authorized_keys
+
+    chmod 644  authorized_keys
+
+    	
+
+    3.配置hadoop环境
+    wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+    tar -zxvf hadoop-2.7.3.tar.gz
+    mv hadoop-2.7.3 /usr/local/hadoop
+
+    java环境安装
+    $ yum search java | grep -i --color JDK
+    icedtea-web.x86_64 : Additional Java components for OpenJDK - Java browser
+    java-1.6.0-openjdk.x86_64 : OpenJDK Runtime Environment
+    java-1.6.0-openjdk-demo.x86_64 : OpenJDK Demos
+    java-1.6.0-openjdk-devel.x86_64 : OpenJDK Development Environment
+    java-1.6.0-openjdk-javadoc.x86_64 : OpenJDK API Documentation
+    java-1.6.0-openjdk-src.x86_64 : OpenJDK Source Bundle
+    java-1.7.0-openjdk.x86_64 : OpenJDK Runtime Environment
+    java-1.7.0-openjdk-accessibility.x86_64 : OpenJDK accessibility connector
+    java-1.7.0-openjdk-demo.x86_64 : OpenJDK Demos
+    java-1.7.0-openjdk-devel.x86_64 : OpenJDK Development Environment
+    java-1.7.0-openjdk-headless.x86_64 : The OpenJDK runtime environment without
+    java-1.7.0-openjdk-javadoc.noarch : OpenJDK API Documentation
+    java-1.7.0-openjdk-src.x86_64 : OpenJDK Source Bundle
+    java-1.8.0-openjdk.i686 : OpenJDK Runtime Environment
+    java-1.8.0-openjdk.x86_64 : OpenJDK Runtime Environment
+    java-1.8.0-openjdk-accessibility.x86_64 : OpenJDK accessibility connector
+    java-1.8.0-openjdk-accessibility-debug.x86_64 : OpenJDK accessibility connector
+    java-1.8.0-openjdk-debug.i686 : OpenJDK Runtime Environment with full debug on
+    java-1.8.0-openjdk-debug.x86_64 : OpenJDK Runtime Environment with full debug on
+    java-1.8.0-openjdk-demo.x86_64 : OpenJDK Demos
+    java-1.8.0-openjdk-demo-debug.x86_64 : OpenJDK Demos with full debug on
+    java-1.8.0-openjdk-devel.i686 : OpenJDK Development Environment
+    java-1.8.0-openjdk-devel.x86_64 : OpenJDK Development Environment
+    java-1.8.0-openjdk-devel-debug.i686 : OpenJDK Development Environment with full
+    java-1.8.0-openjdk-devel-debug.x86_64 : OpenJDK Development Environment with
+    java-1.8.0-openjdk-headless.i686 : OpenJDK Runtime Environment
+    java-1.8.0-openjdk-headless.x86_64 : OpenJDK Runtime Environment
+    java-1.8.0-openjdk-headless-debug.i686 : OpenJDK Runtime Environment with full
+    java-1.8.0-openjdk-headless-debug.x86_64 : OpenJDK Runtime Environment with full
+    java-1.8.0-openjdk-javadoc.noarch : OpenJDK API Documentation
+    java-1.8.0-openjdk-javadoc-debug.noarch : OpenJDK API Documentation for packages
+    java-1.8.0-openjdk-javadoc-zip.noarch : OpenJDK API Documentation compressed in
+    java-1.8.0-openjdk-javadoc-zip-debug.noarch : OpenJDK API Documentation
+    java-1.8.0-openjdk-src.x86_64 : OpenJDK Source Bundle
+    java-1.8.0-openjdk-src-debug.x86_64 : OpenJDK Source Bundle for packages with
+    ldapjdk.noarch : The Mozilla LDAP Java SDK
+
+    $sudo yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel.x86_64
+    $ java -version
+    openjdk version "1.8.0_121"
+    OpenJDK Runtime Environment (build 1.8.0_121-b13)
+    OpenJDK 64-Bit Server VM (build 25.121-b13, mixed mode)
+
+    #JAVA and HADOOP
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64
+    export HADOOP_HOME=/usr/local/hadoop
+    export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+    export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+    source /etc/profile
+    $ echo $JAVA_HOME
+    /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64
+    $ echo $HADOOP_HOME
+    /usr/local/hadoop
+    $ echo $PATH
+    /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/vagrant/.local/bin:/home/vagrant/bin:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64/bin:/usr/local/hadoop/sbin:/usr/local/hadoop/bin
+     echo $CLASSPATH
+    .:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64/jre/lib/rt.jar:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64/lib/dt.jar:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64/lib/tools.jar
+
+
+    4.修改HADOOP配置文件
+    cd $HADOOP_HOME/etc/hadoop
+    vim hadoop-env.sh
+    export HADOOP_HEAPSIZE=128
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64
+
+    vim core-site.xml 
+    <configuration>
+     <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://master:9000</value>
+    <!--hadoop namenode 服务器地址和端口，以域名形式-->
+    </property>
+
+    <property>
+    <name>dfs.namenode.checkpoint.period</name>
+    <value>1800</value>
+    <!-- editlog每隔30分钟触发一次合并，默认为60分钟 -->
+    </property>
+
+    <property>
+      <name>fs.checkpoint.size</name>
+      <value>67108864</value>
+    </property>
+
+    <property>
+    <name>fs.trash.interval</name>
+    <value>1440</value>
+    <!-- Hadoop文件回收站,自动回收时间,单位分钟,这里设置是1天，默认为0。-->
+    </property>
+
+    <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/usr/local/hadoop/tmp</value>
+    <!-- Hadoop的默认临时路径，这个最好配置，如果在新增节点或者其他情况下莫名其妙的DataNode启动不了，就删除此文件中的tmp目录即可。不过如 果删除了NameNode机器的此目录，那么就需要重>新执行NameNode格式化的命令。/data/hadoop/tmp这里给的路径不需要 创建会自动生成.-->
+    </property>
+
+    <property>
+    <name>io.file.buffer.size</name>
+    <value>131702</value>
+    <!-- 流文件的缓冲区-->
+    </property>
+    </configuration>
+
+
+    vim hdfs-site.xml
+    <configuration>
+     <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>/usr/local/hadoop/hdfs/name</value>
+    <!--HDFS namenode数据镜象目录-->
+    <description>  </description>
+    </property>
+
+    <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>/usr/local/hadoop/hdfs/data</value>
+    <!-- HDFS datanode数据镜象存储路径,可以配置多个不同的分区和磁盘中,使用,号分隔 -->
+    <description> </description>
+    </property>
+
+    <property>
+    <name>dfs.namenode.http-address</name>
+    <value>master:50070</value>
+    <!---HDFS Web查看主机和端口-->
+    </property>
+
+    <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>node1:50090</value>
+    <!--辅控HDFS web查看主机和端口-->
+    </property>
+
+    <property>
+    <name>dfs.webhdfs.enabled</name>
+    <value>true</value>
+    </property>
+
+    <property>
+    <name>dfs.replication</name>
+    <value>3</value>
+    <!--HDFS数据保存份数，通常是3-->
+    </property>
+
+    <property>
+    <name>dfs.datanode.du.reserved</name>
+    <value>1073741824</value>
+    <!-- datanode 写磁盘会预留 1G空间 给其他程序使用,而非写满,单位 bytes-->
+    </property>
+
+    <property>
+    <name>dfs.block.size</name>
+    <value>134217728</value>
+    <!--HDFS数据块大小，当前设置为128M/Blocka-->
+    </property>
+    <property>
+    <name>dfs.permissions.enabled</name>
+    <value>false</value>
+    <!-- HDFS 关闭文件权限 -->
+    </property>
+
+    cp mapred-site.xml.template mapred-site.xml
+    vim mapred-site.xml
+
+    <configuration>
+    <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+    </property>
+    <property>
+    <name>mapreduce.jobtracker.http.address</name>
+    <value>master:50030</value>
+    </property>
+    <property>
+    <name>mapred.job.tracker</name>
+    <value>http://master:9001</value>
+    </property>
+    <property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>master:10020</value>
+    </property>
+    <property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>master:19888</value>
+    </property>
+    </configuration>
+
+
+    vim yarn-site.xml
+    <configuration>
+
+    <!-- Site specific YARN configuration properties -->
+     <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+    </property>
+    <property>
+    <name>yarn.resourcemanager.address</name>
+    <value>master:8032</value>
+    </property>
+    <property>
+    <name>yarn.resourcemanager.scheduler.address</name>
+    <value>master:8030</value>
+    </property>
+    <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>master:8031</value>
+    </property>
+    <property>
+    <name>yarn.resourcemanager.admin.address</name>
+    <value>master:8033</value>
+    </property>
+    <property>
+    <name>yarn.resourcemanager.webapp.address</name>
+    <value>master:8088</value>
+    </property>
+
+    </configuration>
+
+    # -*- mode: ruby -*-
+    # vi: set ft=ruby :
+
+    # All Vagrant configuration is done below. The "2" in Vagrant.configure
+    # configures the configuration version (we support older styles for
+    # backwards compatibility). Please don't change it unless you know what
+    # you're doing.
+    Vagrant.configure("2") do |config|
+    config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+      # The most common configuration options are documented and commented below.
+      # For a complete reference, please see the online documentation at
+      # https://docs.vagrantup.com.
+
+      # Every Vagrant development environment requires a box. You can search for
+      # boxes at https://atlas.hashicorp.com/search.
+      config.vm.box = "centos7v2"
+        config.vm.define :centos7v2 do |centos7v2_config|
+    #        config.vm.network "public_network"
+            config.vm.network :forwarded_port, guest: 80, host: 801
+            config.vm.network :forwarded_port, guest: 22, host: 22
+    #为了ssh hadoop@other 因为用的是22端口
+            config.vm.network "private_network", ip: "192.168.33.100"
+    #windows 系统需要在控制面板配置此IP
+            config.vm.provider :virtualbox do |vb|
+                vb.name = "centos7v2"
+                vb.customize ["modifyvm", :id, "--memory", "1024"]
+            end       
+        end
+      end
+
+      # Disable automatic box update checking. If you disable this, then
+      # boxes will only be checked for updates when the user runs
+      # `vagrant box outdated`. This is not recommended.
+      # config.vm.box_check_update = false
+
+      # Create a forwarded port mapping which allows access to a specific port
+      # within the machine from a port on the host machine. In the example below,
+      # accessing "localhost:8080" will access port 80 on the guest machine.
+      # config.vm.network "forwarded_port", guest: 80, host: 8080
+       
+
+      # Create a private network, which allows host-only access to the machine
+      # using a specific IP.
+      # config.vm.network "private_network", ip: "192.168.33.10"
+
+      # Create a public network, which generally matched to bridged network.
+      # Bridged networks make the machine appear as another physical device on
+      # your network.
+      # config.vm.network "public_network"
+
+      # Share an additional folder to the guest VM. The first argument is
+      # the path on the host to the actual folder. The second argument is
+      # the path on the guest to mount the folder. And the optional third
+      # argument is a set of non-required options.
+      # config.vm.synced_folder "../data", "/vagrant_data"
+
+      # Provider-specific configuration so you can fine-tune various
+      # backing providers for Vagrant. These expose provider-specific options.
+      # Example for VirtualBox:
+      #
+      # config.vm.provider "virtualbox" do |vb|
+      #   # Display the VirtualBox GUI when booting the machine
+      #   vb.gui = true
+      #
+      #   # Customize the amount of memory on the VM:
+      #   vb.memory = "1024"
+      # end
+      #
+      # View the documentation for the provider you are using for more
+      # information on available options.
+
+      # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
+      # such as FTP and Heroku are also available. See the documentation at
+      # https://docs.vagrantup.com/v2/push/atlas.html for more information.
+      # config.push.define "atlas" do |push|
+      #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
+      # end
+
+      # Enable provisioning with a shell script. Additional provisioners such as
+      # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+      # documentation for more information about their specific syntax and use.
+      # config.vm.provision "shell", inline: <<-SHELL
+      #   apt-get update
+      #   apt-get install -y apache2
+      # SHELL
+      #end
+
+    start-dfs.sh and start-yarn.sh 单机版搭建成功
+
+
+
+
 <br style="clear:both">
 <footer>
 
