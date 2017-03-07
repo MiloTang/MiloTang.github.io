@@ -1,0 +1,67 @@
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ITBOX.BID itbox java php android ios golang docker vagrant virtrul">
+    <meta name="author" content="itbox.bid">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>ITBOX</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/carousel.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-fluid" style="background-color:sienna;margin-bottom:8px">
+    <div style="text-align:center;color: white">
+        <h3>ITBOX</h3>
+    </div>
+    </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container-fluid" style="font-size:2.2rem;padding-top:1rem;text-align:center;">
+		    <div class="col-xs-3 col-sm-3">
+			<div class="dropdown">
+				<a href="http://www.itbox.bid/index">
+					<span class="glyphicon glyphicon-home"></span>
+				</a>
+			</div>
+			</div>
+			<div class="col-xs-3 col-sm-3">
+			<div class="dropdown">
+				<a href="http://www.itbox.bid/dushu.html" >
+					<span class="glyphicon glyphicon-th-large"></span>
+				</a>
+			</div>
+			</div>
+			<div class="col-xs-3 col-sm-3">
+			<div class="dropdown">
+				<a href="http://www.itbox.bid/shizhan.html" >
+					<span class="glyphicon glyphicon-folder-open"></span>
+				</a>
+			</div>
+			</div>	
+			<div class="col-xs-3 col-sm-3">
+			<div class="dropdown">
+				<a href="http://www.itbox.bid/shouce.html" >
+					<span class="glyphicon glyphicon-book"></span>
+				</a>
+			</div>
+			</div>	
+	 
+	</div>
+</nav>
+
+
+
+<div class="container">
+ <h2 class="text-center">CentOS7.2下Hadoop2.7.3的搭建</h2>
+<blockquote><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">1.基本环境：</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">$&nbsp; cat&nbsp; /etc/redhat-release</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">CentOS Linux release 7.3.1611 (Core)</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">$ uname -r</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">3.10.0-514.2.2.el7.x86_64</span><br></blockquote><blockquote><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms'; font-size: 24px;">2.配置系统环境</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">$ sudo vim /etc/hostname<br>master<br>$ sudo vim /etc/hosts<br>192.168.110.100&nbsp; master</span><br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">192.168.110.101&nbsp; node1<br></span><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">192.168.110.102&nbsp; node2<br></span>添加用户hadoop<br><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">useradd hadoop</span><br></span><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">passwd &nbsp;hadoop<br><br></span><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">vim /etc/sudoers<br>在root &nbsp; &nbsp;ALL=(ALL) &nbsp; &nbsp; &nbsp; ALL 后加入</span>
+<p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">hadoop &nbsp; &nbsp;ALL=(ALL) &nbsp; &nbsp; &nbsp; ALL</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';"><br></span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">无密钥连接</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">vim /etc/ssh/sshd_config</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">RSAAuthentication yes<br>PubkeyAuthentication yes</span></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><span style="padding: 0px; margin: 0px; font-family: 'comic sans ms';">去掉注释</span><br><b><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: rgb(255, 20, 147) !important; background: none !important;">ssh</code><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">-keygen&nbsp;-t&nbsp;rsa</code></b></p><p style="padding: 0px; margin: 0px; clear: both; height: auto; overflow: hidden; color: rgb(80, 80, 80); font-family: 宋体, 'Arial Narrow', arial, serif; font-size: 14px; line-height: 28px;"><b><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;"></code><code class="bash spaces" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; background: none !important;"></code><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: rgb(255, 20, 147) !important; background: none !important;">cd</code>&nbsp;<code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">/home/hadoop/</code><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">.</code><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: rgb(255, 20, 147) !important; background: none !important;">ssh</code><code class="bash plain" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; font-size: 1em !important; min-height: auto !important; color: black !important; background: none !important;">/</code><code class="bash functions" style="padding: 0px !important; margin: 0px !important; border-radius: 0px !important; border: 0px !important; bottom: auto !important; float: none !important; left: auto !important; line-height:
+<br style="clear:both">
+<footer>
+
+</footer>
+</div><!-- /.container -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+</body></html>
