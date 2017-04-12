@@ -287,7 +287,21 @@
        
       </footer>
     </div><!-- /.container -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>  
+    <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script> 
+	<script src="static/js/hammer.min.js"></script>  	
+	<script>
+          $(function(){
+            var myElement= document.getElementById('myCarousel')
+            var hm=new Hammer(myElement);
+            hm.on("swipeleft",function(){
+                $('#myCarousel').carousel('next')
+            })
+            hm.on("swiperight",function(){
+                $('#myCarousel').carousel('prev')
+            })
+        })
+  </script>
+	
 </body>
 </html>
